@@ -29,8 +29,6 @@ Then it should remove punctuation marks and return the "cleaned" text.
 def cleanFileContents(f):
     # The below two lines open the file and read all the text from it
     # storing it into a variable called "text".
-    # Set a breakpoint to line 15 and inspect the contents of the variable "text"
-    # before and after executing the read() statement.
     # You do not need to modify the below two lines; they are already working as needed.
     with open(f, 'r') as f:
         text = f.read()
