@@ -3,6 +3,13 @@
 # the main function already written,
 # and comment instructions regarding what you should write.
 
+'''
+SUMMARY OF WHAT YOU NEED TO DO:
+You will only need to fill in several lines of code.
+The program looks long because of the comments; it is actually very short.
+Look for TODO items! (But read the comments, too :) ).
+'''
+
 # Import the system module
 import sys
 
