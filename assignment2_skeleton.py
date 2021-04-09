@@ -16,6 +16,9 @@ import sys
 # Import regular expressions module
 import re
 
+# Import the string module to access its punctuation set
+import string
+
 '''
 The below function should be called on a file name.
 It should open the file, read its contents, and store it in a variable.
@@ -32,27 +35,21 @@ def cleanFileContents(f):
     with open(f, 'r') as f:
         text = f.read()
 
-    # Review the regular expressions slides/reading and write a statement using regular
-    # expressions below such that the following characters are replaced by "nothing": ,.!()-?;:"
-    # (Remember to do exactly this and not something else, even if you think something else is better!
-    # The assignment will be graded AUTOMATICALLY, and if you do something else, your output may be different.
-    # Regardless of whether it is better or worse than the solution, you may be marked down if your output is different!)
-
-    # Replace the below line by your call to the appropriate function of the regular expression module here.
-    # Review the lecture/readings on regular expressions. You want the re.sub function.
-    # Read its documentation to understand which argument goes where in the parentheses.
-    # As it is, the below line simply assigns the value of the incoming "text" to a new variable called
-    # "clean_text". There will be no difference between them if you leave it as is.
-    clean_text = text  # Modify this statement!
+    # The below line will clean the text of punctuation marks.
+    # Ask if you are curious about how it works! But you can just use it as is.
+    # Observe the effect of the function by inspecting the debugger pane while stepping over.
+    clean_text = text.translate(str.maketrans('', '', string.punctuation))
 
     # Now, we will want to replace all tabs with spaces, and also all occurrences of more than one
     # space in a row with a single space. Review the regular expression slides/readings, and
     # write a statement below which replaces all occurrences of one or more whitespace-group characters
-    # (that will include tabs) with a single space.
+    # (that will include tabs) with a single space. You want the re.sub function.
+    # The shortcut for all whitespace characters is \s. The regex operator for "one or more" is +.
+    # Read re.sub()'s documentation to understand which argument goes where in the parentheses.
 
-    # Your call to the appropriate function of the regular expression module here.
-    # As is, this "pass" statement is doing nothing at all.
-    pass  # Modify this statement!
+    # TODO: Your call to the re.sub function of the regular expression module here.
+    # As is, the value of clean_text does not change.
+    clean_text = clean_text
 
     # Do not forget to return the result!
     return clean_text
@@ -69,18 +66,23 @@ def countTokens(text):
     token_counts = {}
 
     # Use the split() function, defined for strings, to split the text by space.
-    # Store the result in a variable, e.g. called "tokens". That variable will be of type "list".
-    # You can see that if you step through the execution in the debugger.
+    # Store the result in a variable, e.g. called "tokens".
+    # See what the split() function returns and stores in your variable
+    # as you step through the execution in the debugger.
 
-    # Split the text into tokens here, as described above.
+    # TODO: Write a statement below calling split() on your text and storing the
+    # result in a new variable.
 
-    # Iterate over each word in the list of tokens (write a for loop over the list).
-    # Inside the loop:
+    # Now, we need to iterate over each word in the list of tokens
+    # (write a for loop over the list that split() returned).
+    # Inside the loop, so, for each word, we will perform some conditional logic:
     # If the word is not yet stored in the dictionary
-    # "token_counts" as a key, store it there now, and initialize the key's value to 0.
-    # Outside that if statement: now that we are sure the word is stored as a key, increment the count by 1.
+    # we called "token_counts" as a key, we will store it there now,
+    # and we will initialize the key's value to 0.
+    # Outside that if statement: now that we are sure
+    # the word is stored as a key, we will increment the count by 1.
 
-    # Write a for loop here, doing what is described above.
+    # TODO: Write a for loop here, doing what is described above.
 
     # Do not forget to return the result!
     return token_counts
@@ -88,9 +90,12 @@ def countTokens(text):
 
 '''
 This silly "prediction funtion" will do the following "rudimentary data science":
-If a review contains more of the word "good" than of the word "bad", it predicts "positive".
+If a review contains more of the word "good" than of the word "bad", 
+the function predicts "positive" (by returning a string "POSITIVE").
 If it contains more of the word "bad" than of the word "good",
-it predicts "negative". If the count is equal (note that this includes zero count), it cannot make a prediction.
+the function predicts "negative". 
+If the count is equal (note that this includes zero count),
+the function cannot make a prediction and returns a string "NONE".
 '''
 
 # Constants. Constants are important to avoid typo-related bugs, among other reasons.
@@ -106,15 +111,15 @@ NEG = 'bad'
 def predictSimplistic(counts):
     # This line retrieves the count for "good". If the word "good" is not found in "counts", it returns 0.
     pos_count = counts.get(POS, 0)
-    # Write a similar statement to retrieve the count of "bad".
+    # TODO: Write a similar statement below to retrieve the count of "bad".
     # neg_count =
 
-    # Write an if-elif-else block here, following the logic described in the function description.
+    # TODO: Write an if-elif-else block here, following the logic described in the function description.
     # Do not forget to return the prediction! You will be returning one of the constants declared above.
     # You may choose to store a prediction in a variable and then write the return statement outside
     # of the if-else block, or you can have three return statements within the if-else block.
 
-    # You will modify the below return statement or move it into your if-else block when you write it.
+    # TODO: You will modify the below return statement or move it into your if-else block when you write it.
     return NONE
 
 
@@ -122,7 +127,7 @@ def predictSimplistic(counts):
 When debugging, if you want to start from the very beginning,
 start here. NB: Put the breakpoint not on the "def" line but below it.
 Do not modify this function; we already wrote it for you.
-You need to modify the functions which it calls.
+You need to modify the functions which it calls, not the main() itself.
 '''
 
 
@@ -145,7 +150,10 @@ def main(argv):
     # Store the output of the function in a new variable called "prediction".
     prediction = predictSimplistic(tokens_with_counts)
 
-    # Finally, let's print out what we predicted:
+    # Finally, let's print out what we predicted. Note how we are calling the format()
+    # function on the string we are printing out, and we are passing it two
+    # arguments: the file name and our prediction. This is a convenient way of
+    # printing out results. We will keep using it in the future.
     print("The prediction for file {} is {}".format(filename, prediction))
 
 
