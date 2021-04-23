@@ -71,6 +71,7 @@ def countTokens(text):
     # TODO: Write a statement below calling split() on your text and storing the
     # result in a new variable.
     all_tokens = text.split(sep=" ")
+    
     # Now, we need to iterate over each word in the list of tokens
     # (write a for loop over the list that split() returned).
     # Inside the loop, so, for each word, we will perform some conditional logic:
